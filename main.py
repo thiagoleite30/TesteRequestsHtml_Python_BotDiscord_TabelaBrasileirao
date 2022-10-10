@@ -66,16 +66,6 @@ def busca_time(tabela, time):
     return -1
 
 
-def monta_tabela(tabela):
-    cabecalho = 'Classificação\t\t  \tPG\t\t\tJ\t\t\tV\t\t\tE\t\t\tD\t\t\tGP\t\t\tGC\t\t\tSG\t\t\t%\n'
-    tabelaStr = ''
-    for i in range(20):
-        if i < 9:
-            tabelaStr += f'{tabela[i].posicao}  {tabela[i].abreviatura}\t\t\t\t\t{tabela[i].pg}\t\t{tabela[i].jogos}\t\t{tabela[i].vitorias}\t\t{tabela[i].empates}\t\t{tabela[i].derrotas}\t\t{tabela[i].golsPro}\t\t{tabela[i].golsContra}\t\t{tabela[i].saldoGols}\t\t{tabela[i].percentual}\n'
-        else:
-            tabelaStr += f'{tabela[i].posicao} {tabela[i].abreviatura}\t\t\t\t\t{tabela[i].pg}\t{tabela[i].jogos}\t{tabela[i].vitorias}\t{tabela[i].empates}\t{tabela[i].derrotas}\t{tabela[i].golsPro}\t{tabela[i].golsContra}\t{tabela[i].saldoGols}\t{tabela[i].percentual}\n'
-    return cabecalho + tabelaStr
-
 def cria_tabela(tabela):
     output = t2a(
         header=["Posição", "Classificação", "PG", "J", "V", "E", "D", "GP", "GC", "SG", "%"],
