@@ -103,11 +103,13 @@ async def tabelaBot(ctx):
     print(cria_tabela(tabela))
     await ctx.respond(f"```\n{cria_tabela(tabela)}\n```")
 
+'''
 @bot.command
 @lightbulb.command('testa_bot', 'Bot morreu')
 @lightbulb.implements(lightbulb.SlashCommand)
 async def tabelaBot(ctx):
     await ctx.respond(f'Testando bot')
+'''
 
 bot.run()
 
