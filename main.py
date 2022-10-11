@@ -5,7 +5,6 @@ from table2ascii import table2ascii as t2a, PresetStyle
 bot = lightbulb.BotApp(token=open('tokens/token_ds.txt', 'r').read(),
                        default_enabled_guilds=(int(open('tokens/ds_channel_id.txt', 'r').read())))
 
-
 class Time():
     def __init__(self, posicao, nome, abreviatura, pg, jogos, vitorias, empates, derrotas, golsPro, golsContra,
                  saldoGols, percentual):
@@ -77,39 +76,20 @@ def cria_tabela(tabela):
 
     return output
 
+#Abaixo inicializamos a conexão com o site UOL e já pegamos todos os times
+times = info_times()
 
-# times = info_times()
+#Cria lista tabela com objetos da classe Time que recebem os valores da lista times em seus respectivos atributos
+tabela = [Time(*times[i]) for i in range(20)]
 
-# tabela = [Time(*times[i]) for i in range(20)]
-
-# print(monta_tabela(tabela))
 
 @bot.command
 @lightbulb.command('tabela_brasileirao', 'Bot mostra a classificação do brasileirão')
 @lightbulb.implements(lightbulb.SlashCommand)
 async def tabelaBot(ctx):
-    times = info_times()
-    tabela = [Time(*times[i]) for i in range(20)]
-    # print(monta_tabela(tabela))
-    # await ctx.respond(f'```{monta_tabela(tabela)}```')
-    output = t2a(
-        header=["Posição", "Classificação", "PG", "J", "V", "E", "D", "GP", "GC", "%"],
-        body=[[tabela[0].posicao, tabela[0].nome, tabela[0].pg, tabela[0].jogos, tabela[0].vitorias, tabela[0].empates,
-               tabela[0].derrotas, tabela[0].golsPro, tabela[0].golsContra, tabela[0].percentual],
-              [tabela[1].posicao, tabela[1].nome, tabela[1].pg, tabela[1].jogos, tabela[1].vitorias, tabela[1].empates,
-               tabela[1].derrotas, tabela[1].golsPro, tabela[1].golsContra, tabela[1].percentual]],
-        style=PresetStyle.thin_compact
-    )
-    print(cria_tabela(tabela))
+
     await ctx.respond(f"```\n{cria_tabela(tabela)}\n```")
 
-'''
-@bot.command
-@lightbulb.command('testa_bot', 'Bot morreu')
-@lightbulb.implements(lightbulb.SlashCommand)
-async def tabelaBot(ctx):
-    await ctx.respond(f'Testando bot')
-'''
 
 bot.run()
 
